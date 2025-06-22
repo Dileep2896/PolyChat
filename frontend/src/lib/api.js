@@ -1,7 +1,22 @@
 import { axiosInstance } from "./axios";
 
 export const getAuthUser = async () => {
-  const res = await axiosInstance.get("/auth/me");
+  try {
+    const res = await axiosInstance.get("/auth/me");
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null; // Return null if there's an error fetching the user
+  }
+};
+
+export const login = async (loginData) => {
+  const res = await axiosInstance.post("/auth/login", loginData);
+  return res.data;
+};
+
+export const logout = async () => {
+  const res = await axiosInstance.post("/auth/logout");
   return res.data;
 };
 
