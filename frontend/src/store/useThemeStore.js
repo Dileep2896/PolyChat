@@ -1,6 +1,9 @@
 import { create } from "zustand";
 
 export const useThemeStore = create((set) => ({
-  theme: "coffee",
-  setTheme: (newTheme) => set({ theme: newTheme }),
+  theme: localStorage.getItem("polychat-theme") || "coffee", // Default to light theme
+  setTheme: (newTheme) => {
+    localStorage.setItem("polychat-theme", newTheme); // Save to localStorage
+    set({ theme: newTheme });
+  },
 }));
